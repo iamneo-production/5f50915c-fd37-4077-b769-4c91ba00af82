@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Vehic</title>
+<style>
+#rcorners2 {
+  border-radius: 25px;
+  border: 2px solid seagreen;
+  padding: 20px; 
+  width: 200px;
+  height: 300px;  
+}
+input {
+text-align: center;
+height: 30px;
+border: 2px white;
+}
+form {
+background-color: seagreen;
+color: white;
+}
+#rcorners1 {
+  border-radius: 5px;
+  }
+
+</style>
+</head>
+<script>  
+  function myFunction(){  
+ 
+    
+  }  
+  </script>
+<body>
+<center>
+<form method="post" action="/addVehicle" bgcolor="seagreen" id="rcorners2">
+<center>Add Vehicle Details</center><br />
+<input id="rcorners1" type="text" placeholder="enter Vehicle name" name="vehicleName" size="25"><br /><br />
+<input id="rcorners1" type="text" placeholder="enter Vehicle model" name="vehicleModel" size="25"><br /><br />
+<input id="rcorners1" type="text" placeholder="enter Vehicle CC" name="entervehicleCC" size="25"><br /><br />
+<input id="rcorners1" type="text" placeholder="enter Description" name="enterDescription" size="25"><br /><br />
+<input id="rcorners1" type="text" placeholder="enter Vehicle Price" name="enterPrice" size="25"><br /><br />
+<center><input id="rcorners1" type="submit" name="addButton" value="Add" onclick="myFunction()"></center>
+</form>
+</center></body>
+</html>

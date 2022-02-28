@@ -1,0 +1,127 @@
+public class VehicleDao {
+    private String jdbcURL = "jdbc:mysql://localhost/dbname";
+    private String jdbcUsername = "root";
+    private String jdbcPassword = "examly";
+    private Connection jdbcConnection;
+     
+    protected Connection getConnection() {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
+    public static int addVehicle(Vehicle vel){  
+        int status=0;  
+        try{  
+            Connection con=ConnectionManager.getConnection();  
+            PreparedStatement ps=con.prepareStatement(  
+                         "insert into vehicle1(vehicleID, vehicleName, vehicleModel, vehicleCC, vehicleDescription, vehiclePrice) values (?,?,?,?,?,?)");  
+            ps.setString(1,vel.getVehicleName());  
+            ps.setString(2,vel.getVehicleModel());  
+            ps.setString(3,vel.getVehicleCC());  
+            ps.setString(4,vel.getVehicleDescription()); 
+            ps.setString(5,vel.getVehiclePrice());
+                         
+            status=ps.executeUpdate();  
+              
+            con.close();  
+        }catch(Exception ex){
+            ex.printStackTrace();
+            }  
+          
+        return status;  
+    }
+
+    public static int updateVehicle(Vehicle vele){  
+        int status=0;  
+        try{  
+            Connection con=ConnectionManager.getConnection();  
+            PreparedStatement ps=con.prepareStatement(  
+                         "update vehicle1 set name=?,password=?,email=?,country=? where id=?");  
+            ps.setString(1,vele.getVehicleName());  
+            ps.setString(2,vele.getVehicleModel());  
+            ps.setString(3,vele.getVehicleCC());  
+            ps.setString(4,vele.getVehicleDescription()); 
+            ps.setString(5,vele.getVehiclePrice());  
+            ps.setInt(6,evele.getVehicleId());  
+              
+            status=ps.executeUpdate();  
+              
+            con.close();  
+        }catch(Exception ex){
+            ex.printStackTrace();
+            }  
+          
+        return status;  
+    } 
+
+    public static int deleteVehicle(int vehicleId){  
+        int status=0;  
+        try{  
+            Connection con=ConnectionManager.getConnection();  
+            PreparedStatement ps=con.prepareStatement("delete from vehicle1 where vehicleId=?");  
+            ps.setInt(1,vehicleId);  
+            status=ps.executeUpdate();  
+              
+            con.close();  
+        }catch(Exception e){
+            e.printStackTrace();
+            }  
+          
+        return status;  
+    }  
+
+    public static Vahicle viewVehicleById(int vehicleId){  
+        Vahicle vcle=new Vahicle();  
+          
+        try{  
+            Connection con=ConnectionManager.getConnection();  
+            PreparedStatement ps=con.prepareStatement("select * from vehicle1 where id=?");  
+            ps.setInt(1,vehicleId);  
+            ResultSet rs=ps.executeQuery();  
+            if(rs.next()){  
+                vcle.setVehicleId(rs.getInt(1));  
+                vcle.setVehicleName(rs.getString(2));  
+                vcle.setVehicleModel(rs.getString(3));  
+                vcle.setVehicleCC(rs.getInt(4));  
+                vcle.setVehicleDescription(rs.getString(5)); 
+                vcle.setVehiclePrice(rs.getInt(6)) 
+            }  
+            con.close();  
+        }catch(Exception ex){
+            ex.printStackTrace();
+            }  
+          
+        return vcle;  
+    }  
+
+    public static List<Vehicle> listVehicles(){  
+        List<Vehicle> list=new ArrayList<Vehicle>();  
+          
+        try{  
+            Connection con=ConnectionManager.getConnection();  
+            PreparedStatement ps=con.prepareStatement("select * from vehicle1");  
+            ResultSet rs=ps.executeQuery();  
+            while(rs.next()){  
+                Vehicle vle=new Vehicle();
+                vle.setVehicleId(rs.getInt(1));  
+                vle.setVehicleName(rs.getString(2));  
+                vle.setVehicleModel(rs.getString(3));  
+                vle.setVehicleCC(rs.getInt(4));  
+                vle.setVehicleDescription(rs.getString(5)); 
+                vle.setVehiclePrice(rs.getInt(6))  
+                list.add(vle);  
+            }  
+            con.close();  
+        }catch(Exception e){e.printStackTrace();}  
+          
+        return list;  
+    }
+}

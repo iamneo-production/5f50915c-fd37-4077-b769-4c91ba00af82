@@ -1,0 +1,43 @@
+public class VehicleServlet extends HttpServlet{
+    private static final long serialVersionUID = 1L;
+    private VehicleDao vehicleDao();
+
+    public void init() {
+        vehicleDao = new VehicleDao(); 
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+       
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        String action = request.getServletPath();
+            System.out.Println("action:"+action);
+        try {
+            switch (action) {
+                case "/addVehicle":
+                    showNewForm(request, response);
+                    break;
+                case "/deleteVehicle":
+                    deleteVehicle(request, response);
+                    break;
+                case "/viewVehicleById":
+                    showEditForm(request, response);
+                    break;
+                case "/updateVehicle":
+                    updateVehicle(request, response);
+                    break;
+                default:
+                    listVehicle(request, response);
+                    break;
+            }
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
+        }
+    }
+
+    
+}
